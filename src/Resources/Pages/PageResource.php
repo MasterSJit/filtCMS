@@ -2,13 +2,13 @@
 
 namespace EthickS\FiltCMS\Resources\Pages;
 
+use BackedEnum;
+use EthickS\FiltCMS\Models\Page;
 use EthickS\FiltCMS\Resources\Pages\Pages\CreatePage;
 use EthickS\FiltCMS\Resources\Pages\Pages\EditPage;
 use EthickS\FiltCMS\Resources\Pages\Pages\ListPages;
 use EthickS\FiltCMS\Resources\Pages\Schemas\PageForm;
 use EthickS\FiltCMS\Resources\Pages\Tables\PagesTable;
-use EthickS\FiltCMS\Models\Page;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -21,7 +21,7 @@ class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?string $recordTitleAttribute = 'Page';
 
@@ -33,6 +33,7 @@ class PageResource extends Resource
     {
         return static::getModel()::count();
     }
+
     public static function form(Schema $schema): Schema
     {
         return PageForm::configure($schema);

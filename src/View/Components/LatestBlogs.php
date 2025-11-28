@@ -2,12 +2,13 @@
 
 namespace EthickS\FiltCMS\View\Components;
 
-use Illuminate\View\Component;
 use EthickS\FiltCMS\Models\Blog;
+use Illuminate\View\Component;
 
 class LatestBlogs extends Component
 {
     public $blogs;
+
     public $limit;
 
     public function __construct(int $limit = 5)

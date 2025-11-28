@@ -74,8 +74,8 @@ class CategoryForm
                                     ->separator(','),
                             ])
                             ->columns(2),
-                ])
-                ->columnSpanFull(),
+                    ])
+                    ->columnSpanFull(),
             ]);
     }
 }

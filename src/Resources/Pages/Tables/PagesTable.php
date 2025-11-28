@@ -13,7 +13,6 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
@@ -28,7 +27,7 @@ class PagesTable
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->formatStateUsing(fn ($state) => substr($state, 0, 10).(strlen($state) > 10 ? '...' : ''))
+                    ->formatStateUsing(fn ($state) => substr($state, 0, 10) . (strlen($state) > 10 ? '...' : ''))
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('slug')

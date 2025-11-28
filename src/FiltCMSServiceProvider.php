@@ -2,6 +2,9 @@
 
 namespace EthickS\FiltCMS;
 
+use EthickS\FiltCMS\Commands\FiltCMSCommand;
+use EthickS\FiltCMS\Commands\PublishScheduledContent;
+use EthickS\FiltCMS\Testing\TestsFiltCMS;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -9,14 +12,11 @@ use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Route;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
-use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use EthickS\FiltCMS\Commands\FiltCMSCommand;
-use EthickS\FiltCMS\Commands\PublishScheduledContent;
-use EthickS\FiltCMS\Testing\TestsFiltCMS;
 
 class FiltCMSServiceProvider extends PackageServiceProvider
 {
@@ -63,7 +63,7 @@ class FiltCMSServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->app->singleton('filtcms', function ($app) {
-            return new \EthickS\FiltCMS\Services\FiltCMSService();
+            return new \EthickS\FiltCMS\Services\FiltCMSService;
         });
     }
 

@@ -2,26 +2,26 @@
 
 namespace EthickS\FiltCMS\Resources\Categories;
 
+use BackedEnum;
+use EthickS\FiltCMS\Models\Category;
 use EthickS\FiltCMS\Resources\Categories\Pages\CreateCategory;
 use EthickS\FiltCMS\Resources\Categories\Pages\EditCategory;
 use EthickS\FiltCMS\Resources\Categories\Pages\ListCategories;
 use EthickS\FiltCMS\Resources\Categories\Schemas\CategoryForm;
 use EthickS\FiltCMS\Resources\Categories\Tables\CategoriesTable;
-use EthickS\FiltCMS\Models\Category;
-use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolder;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedFolder;
 
     protected static string | UnitEnum | null $navigationGroup = 'FiltCMS';
 

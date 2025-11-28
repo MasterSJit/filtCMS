@@ -12,7 +12,8 @@ use Illuminate\Support\Str;
 
 class Blog extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'filtcms_blogs';
 
@@ -93,7 +94,7 @@ class Blog extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published');
-            // ->where('published_at', '<=', now());
+        // ->where('published_at', '<=', now());
     }
 
     public function scopeDraft($query)
@@ -104,7 +105,7 @@ class Blog extends Model
     public function scopeScheduled($query)
     {
         return $query->where('status', 'scheduled');
-            // ->where('published_at', '>', now());
+        // ->where('published_at', '>', now());
     }
 
     public function scopeTrending($query)
@@ -127,7 +128,7 @@ class Blog extends Model
 
         $path[] = $this->slug;
 
-        return '/'.implode('/', $path);
+        return '/' . implode('/', $path);
     }
 
     public function incrementViews(): void

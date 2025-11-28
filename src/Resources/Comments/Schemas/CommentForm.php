@@ -62,7 +62,8 @@ class CommentForm
                 Select::make('parent_id')
                     ->label('Reply To')
                     ->relationship('parent', 'id')
-                    ->getOptionLabelFromRecordUsing(fn (Comment $record) => substr($record->content, 0, 50).'...'
+                    ->getOptionLabelFromRecordUsing(
+                        fn (Comment $record) => substr($record->content, 0, 50) . '...'
                     )
                     ->searchable()
                     ->preload(),

@@ -81,4 +81,3 @@ return [
     'custom_css' => '',
     'custom_js' => '',
 ];
-

@@ -39,7 +39,7 @@ class CategoriesTable
 
                         $indent = str_repeat('━━ ', $level);
 
-                        return $indent.$record->name;
+                        return $indent . $record->name;
                     })
                     ->searchable(query: function ($query, string $search) {
                         return $query->where('name', 'like', "%{$search}%");

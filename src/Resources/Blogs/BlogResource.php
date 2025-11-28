@@ -2,12 +2,13 @@
 
 namespace EthickS\FiltCMS\Resources\Blogs;
 
+use BackedEnum;
+use EthickS\FiltCMS\Models\Blog;
 use EthickS\FiltCMS\Resources\Blogs\Pages\CreateBlog;
 use EthickS\FiltCMS\Resources\Blogs\Pages\EditBlog;
 use EthickS\FiltCMS\Resources\Blogs\Pages\ListBlogs;
 use EthickS\FiltCMS\Resources\Blogs\Schemas\BlogForm;
 use EthickS\FiltCMS\Resources\Blogs\Tables\BlogsTable;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -15,13 +16,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use UnitEnum;
-use EthickS\FiltCMS\Models\Blog;
 
 class BlogResource extends Resource
 {
     protected static ?string $model = Blog::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPencilSquare;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedPencilSquare;
 
     protected static ?string $recordTitleAttribute = 'Blog';
 

@@ -3,8 +3,8 @@
 namespace EthickS\FiltCMS\Http\Controllers;
 
 use EthickS\FiltCMS\Models\Blog;
-use EthickS\FiltCMS\Models\Page;
 use EthickS\FiltCMS\Models\Category;
+use EthickS\FiltCMS\Models\Page;
 use EthickS\FiltCMS\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -40,7 +40,7 @@ class FiltCMSController extends Controller
     public function blogIndex(Request $request)
     {
         $perPage = Setting::get('posts_per_page', 10);
-        
+
         $blogs = Blog::with(['category', 'author'])
             ->where('status', 'published')
             ->where('published_at', '<=', now())
@@ -54,9 +54,9 @@ class FiltCMSController extends Controller
     {
         $categorySlug = end($segments);
         $category = Category::where('slug', $categorySlug)->firstOrFail();
-        
+
         $perPage = Setting::get('posts_per_page', 10);
-        
+
         $blogs = Blog::with(['category', 'author'])
             ->where('category_id', $category->id)
             ->where('status', 'published')

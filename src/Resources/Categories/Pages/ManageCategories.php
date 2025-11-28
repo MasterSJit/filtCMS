@@ -14,7 +14,7 @@ class ManageCategories extends Page
 
     protected string $view = 'volt-livewire::filament.resources.categories.pages.manage-categories';
 
-    public function mount(int|string $record): void
+    public function mount(int | string $record): void
     {
         $this->record = $this->resolveRecord($record);
     }

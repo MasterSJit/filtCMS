@@ -2,11 +2,11 @@
 
 namespace EthickS\FiltCMS\Services;
 
+use ArrayAccess;
 use EthickS\FiltCMS\Models\Blog;
 use EthickS\FiltCMS\Models\Category;
 use EthickS\FiltCMS\Models\Comment;
 use EthickS\FiltCMS\Models\Page;
-use ArrayAccess;
 use Illuminate\Support\Collection;
 
 class FiltCMSService implements ArrayAccess
@@ -16,7 +16,7 @@ class FiltCMSService implements ArrayAccess
     // Blog Methods
     public function blog(string $slug): ?Blog
     {
-        return $this->cache['blog.'.$slug] ??= Blog::where('slug', $slug)->published()->first();
+        return $this->cache['blog.' . $slug] ??= Blog::where('slug', $slug)->published()->first();
     }
 
     public function blogTitle(string $slug): ?string
@@ -102,7 +102,7 @@ class FiltCMSService implements ArrayAccess
     // Page Methods
     public function page(string $slug): ?Page
     {
-        return $this->cache['page.'.$slug] ??= Page::where('slug', $slug)->published()->first();
+        return $this->cache['page.' . $slug] ??= Page::where('slug', $slug)->published()->first();
     }
 
     public function pageTitle(string $slug): ?string
@@ -158,7 +158,7 @@ class FiltCMSService implements ArrayAccess
     // Category Methods
     public function category(string $slug): ?Category
     {
-        return $this->cache['category.'.$slug] ??= Category::where('slug', $slug)->first();
+        return $this->cache['category.' . $slug] ??= Category::where('slug', $slug)->first();
     }
 
     public function categoryName(string $slug): ?string

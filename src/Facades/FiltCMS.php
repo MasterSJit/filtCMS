@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \EthickS\FiltCMS\FiltCMS
+ *
  * @method static \EthickS\FiltCMS\Blog|null blog(string $slug)
  * @method static string|null blogTitle(string $slug)
  * @method static string|null blogBody(string $slug)

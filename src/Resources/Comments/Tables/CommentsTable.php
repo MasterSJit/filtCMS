@@ -31,7 +31,8 @@ class CommentsTable
             ->columns([
                 TextColumn::make('commentable_type')
                     ->label('Type')
-                    ->formatStateUsing(fn (string $state): string => str_replace('App\\Models\\', '', $state)
+                    ->formatStateUsing(
+                        fn (string $state): string => str_replace('App\\Models\\', '', $state)
                     )
                     ->badge()
                     ->sortable(),
@@ -50,7 +51,8 @@ class CommentsTable
 
                 TextColumn::make('author_name')
                     ->label('Author')
-                    ->getStateUsing(fn (Comment $record) => $record->user ? $record->user->name : $record->author_name
+                    ->getStateUsing(
+                        fn (Comment $record) => $record->user ? $record->user->name : $record->author_name
                     )
                     ->searchable(['author_name'])
                     ->sortable(),

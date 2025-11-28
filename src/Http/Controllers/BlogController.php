@@ -15,6 +15,7 @@ class BlogController extends Controller
             ->published()
             ->orderBy('published_at', 'desc')
             ->paginate(12);
+
         // dd($blogs->toArray());
         return view('blogs.index', compact('blogs'));
     }

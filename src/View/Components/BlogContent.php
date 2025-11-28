@@ -2,8 +2,8 @@
 
 namespace EthickS\FiltCMS\View\Components;
 
-use Illuminate\View\Component;
 use EthickS\FiltCMS\Models\Blog;
+use Illuminate\View\Component;
 
 class BlogContent extends Component
 {

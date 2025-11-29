@@ -38,7 +38,7 @@ class FiltCMSServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub('ethicks/filtcms');
+                    ->askToStarRepoOnGitHub('MasterSJit/filtCMS');
             });
 
         $configFileName = $package->shortName();

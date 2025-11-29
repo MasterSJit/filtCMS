@@ -129,8 +129,8 @@ class FiltCMSServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('filtcms', __DIR__ . '/../resources/dist/components/filtcms.js'),
-            Css::make('filtcms-styles', __DIR__ . '/../resources/dist/filtcms.css'),
-            Js::make('filtcms-scripts', __DIR__ . '/../resources/dist/filtcms.js'),
+            // Css::make('filtcms-styles', __DIR__ . '/../resources/dist/filtcms.css'),
+            // Js::make('filtcms-scripts', __DIR__ . '/../resources/dist/filtcms.js'),
         ];
     }
 

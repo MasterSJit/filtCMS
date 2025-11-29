@@ -83,7 +83,7 @@ composer require ethicks/filtcms
 Run the installation command:
 
 ```bash
-php artisan filtcms:install
+php artisan filtcms:install && npm install && npm run build
 ```
 
 This will:

@@ -1,15 +1,16 @@
 {
-    "name": "mastersjit/filtcms",
+    "name": "ethicks/filtcms",
     "description": "A Full featured CMS plugin for Filament PHP",
     "keywords": [
+        "EthickS",
         "MasterSJit",
         "laravel",
         "filtcms"
     ],
-    "homepage": "https://github.com/MasterSJit/filtCMS",
+    "homepage": "https://github.com/MasterSJit/filtcms",
     "support": {
-        "issues": "https://github.com/MasterSJit/filtCMS/issues",
-        "source": "https://github.com/MasterSJit/filtCMS"
+        "issues": "https://github.com/MasterSJit/filtcms/issues",
+        "source": "https://github.com/MasterSJit/filtcms"
     },
     "license": "MIT",
     "authors": [

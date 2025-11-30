@@ -5,6 +5,8 @@ namespace EthickS\FiltCMS\Pages;
 use BackedEnum;
 use EthickS\FiltCMS\Models\Setting;
 use Filament\Actions\Action;
+use Filament\Forms\Components\CodeEditor;
+use Filament\Forms\Components\CodeEditor\Enums\Language;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -55,6 +57,31 @@ class SettingsPage extends Page
             // Page Settings
             'default_page_template' => Setting::get('default_page_template', 'default'),
             'allow_page_comments' => Setting::get('allow_page_comments', true),
+
+            // Layout Settings
+            'app_layout_type' => Setting::get('app_layout_type', 'component'),
+            'app_layout' => Setting::get('app_layout', ''),
+            'app_layout_section' => Setting::get('app_layout_section', 'content'),
+            'inertia_page_component' => Setting::get('inertia_page_component', 'FiltCMS/Blog'),
+
+            // Blog View Settings
+            'blog_index_view_type' => Setting::get('blog_index_view_type', 'default'),
+            'blog_index_view_file' => Setting::get('blog_index_view_file', ''),
+            'blog_index_custom_html' => Setting::get('blog_index_custom_html', ''),
+            'blog_index_custom_css' => Setting::get('blog_index_custom_css', ''),
+            'blog_index_custom_js' => Setting::get('blog_index_custom_js', ''),
+            'blog_show_view_type' => Setting::get('blog_show_view_type', 'default'),
+            'blog_show_view_file' => Setting::get('blog_show_view_file', 'blog.show'),
+            'blog_show_custom_html' => Setting::get('blog_show_custom_html', ''),
+            'blog_show_custom_css' => Setting::get('blog_show_custom_css', ''),
+            'blog_show_custom_js' => Setting::get('blog_show_custom_js', ''),
+
+            // Page View Settings
+            'page_show_view_type' => Setting::get('page_show_view_type', 'default'),
+            'page_show_view_file' => Setting::get('page_show_view_file', ''),
+            'page_show_custom_html' => Setting::get('page_show_custom_html', ''),
+            'page_show_custom_css' => Setting::get('page_show_custom_css', ''),
+            'page_show_custom_js' => Setting::get('page_show_custom_js', ''),
 
             // SEO Settings
             'default_meta_title' => Setting::get('default_meta_title', ''),
@@ -141,6 +168,179 @@ class SettingsPage extends Page
                                             ->helperText('Enable comments on pages by default'),
                                     ])
                                     ->columns(2),
+
+                                Section::make('Layout Settings')
+                                    ->description('Configure the layout used for rendering blog and page content based on your Laravel starter kit')
+                                    ->schema([
+                                        Select::make('app_layout_type')
+                                            ->label('Frontend Stack')
+                                            ->options([
+                                                'blade' => 'Blade Only (None) - @extends layout',
+                                                'component' => 'Livewire / Flux - Component layout',
+                                                'inertia' => 'Inertia (React/Vue) - JSON response',
+                                            ])
+                                            ->default('component')
+                                            ->helperText('Select based on what you chose during Laravel installation (php artisan breeze:install). Leave Layout empty to use FiltCMS default.')
+                                            ->live()
+                                            ->required(),
+
+                                        TextInput::make('app_layout')
+                                            ->label(fn ($get) => match($get('app_layout_type')) {
+                                                'blade' => 'Layout View File',
+                                                'component' => 'Layout Component',
+                                                'inertia' => 'Inertia Layout Component',
+                                                default => 'Layout',
+                                            })
+                                            ->placeholder(fn ($get) => match($get('app_layout_type')) {
+                                                'blade' => 'layouts.app',
+                                                'component' => 'layouts.app.sidebar',
+                                                'inertia' => 'layouts/AuthenticatedLayout',
+                                                default => '',
+                                            })
+                                            ->helperText(fn ($get) => match($get('app_layout_type')) {
+                                                'blade' => 'View path for @extends (e.g., layouts.app). Leave empty to use FiltCMS default layout.',
+                                                'component' => 'Component name for <x-...> (e.g., layouts.app.sidebar). Leave empty to use FiltCMS default layout.',
+                                                'inertia' => 'React/Vue layout component path (e.g., layouts/AuthenticatedLayout)',
+                                                default => 'Your layout file or component. Leave empty to use FiltCMS default layout.',
+                                            }),
+
+                                        TextInput::make('app_layout_section')
+                                            ->label('Content Section Name')
+                                            ->placeholder('content')
+                                            ->default('content')
+                                            ->helperText('The @yield() section name in your layout (e.g., content, main, slot)')
+                                            ->visible(fn ($get) => $get('app_layout_type') === 'blade'),
+
+                                        TextInput::make('inertia_page_component')
+                                            ->label('Inertia Page Component Path')
+                                            ->placeholder('FiltCMS/Blog')
+                                            ->helperText('The React/Vue component path for rendering (you need to create this component)')
+                                            ->visible(fn ($get) => $get('app_layout_type') === 'inertia'),
+                                    ])
+                                    ->columns(2),
+
+                                Section::make('Blog View Settings')
+                                    ->description('Configure how blog posts are displayed on the frontend')
+                                    ->schema([
+                                        Select::make('blog_index_view_type')
+                                            ->label('All Blogs View Type')
+                                            ->options([
+                                                'default' => 'Default (Uses App Layout)',
+                                                'file' => 'Custom View File',
+                                                'custom' => 'Custom HTML/CSS/JS',
+                                            ])
+                                            ->default('default')
+                                            ->live()
+                                            ->required(),
+
+                                        TextInput::make('blog_index_view_file')
+                                            ->label('All Blogs View File')
+                                            ->required()
+                                            ->placeholder('e.g., blog.index or custom-blog-list')
+                                            ->helperText('Enter the full view file name (without .blade.php)')
+                                            ->visible(fn ($get) => $get('blog_index_view_type') === 'file'),
+
+                                        CodeEditor::make('blog_index_custom_html')
+                                            ->label('Custom HTML')
+                                            ->language(Language::Html)
+                                            ->helperText('Use @foreach($blogs as $blog) ... @endforeach to loop through blogs')
+                                            ->visible(fn ($get) => $get('blog_index_view_type') === 'custom')
+                                            ->columnSpanFull(),
+
+                                        CodeEditor::make('blog_index_custom_css')
+                                            ->label('Custom CSS')
+                                            ->language(Language::Css)
+                                            ->visible(fn ($get) => $get('blog_index_view_type') === 'custom')
+                                            ->columnSpanFull(),
+
+                                        CodeEditor::make('blog_index_custom_js')
+                                            ->label('Custom JavaScript')
+                                            ->language(Language::JavaScript)
+                                            ->visible(fn ($get) => $get('blog_index_view_type') === 'custom')
+                                            ->columnSpanFull(),
+
+                                        Select::make('blog_show_view_type')
+                                            ->label('Blog Detail View Type')
+                                            ->options([
+                                                'default' => 'Default (Uses App Layout)',
+                                                'file' => 'Custom View File',
+                                                'custom' => 'Custom HTML/CSS/JS',
+                                            ])
+                                            ->default('default')
+                                            ->live()
+                                            ->required(),
+
+                                        TextInput::make('blog_show_view_file')
+                                            ->label('Blog Detail View File')
+                                            ->required()
+                                            ->placeholder('e.g., blog.show or custom-blog-detail')
+                                            ->helperText('Enter the full view file name (without .blade.php)')
+                                            ->visible(fn ($get) => $get('blog_show_view_type') === 'file'),
+
+                                        CodeEditor::make('blog_show_custom_html')
+                                            ->label('Custom HTML')
+                                            ->language(Language::Html)
+                                            ->helperText('Use {{ $blog->title }}, {{ $blog->content }}, {{ $blog->featured_image }}, etc.')
+                                            ->visible(fn ($get) => $get('blog_show_view_type') === 'custom')
+                                            ->columnSpanFull(),
+
+                                        CodeEditor::make('blog_show_custom_css')
+                                            ->label('Custom CSS')
+                                            ->language(Language::Css)
+                                            ->visible(fn ($get) => $get('blog_show_view_type') === 'custom')
+                                            ->columnSpanFull(),
+
+                                        CodeEditor::make('blog_show_custom_js')
+                                            ->label('Custom JavaScript')
+                                            ->language(Language::JavaScript)
+                                            ->visible(fn ($get) => $get('blog_show_view_type') === 'custom')
+                                            ->columnSpanFull(),
+                                    ])
+                                    ->columns(2)
+                                    ->collapsible(),
+
+                                Section::make('Page View Settings')
+                                    ->description('Configure how pages are displayed on the frontend')
+                                    ->schema([
+                                        Select::make('page_show_view_type')
+                                            ->label('Page View Type')
+                                            ->options([
+                                                'default' => 'Default (Uses App Layout)',
+                                                'file' => 'Custom View File',
+                                                'custom' => 'Custom HTML/CSS/JS',
+                                            ])
+                                            ->default('default')
+                                            ->live()
+                                            ->required(),
+
+                                        TextInput::make('page_show_view_file')
+                                            ->label('Page View File')
+                                            ->required()
+                                            ->placeholder('e.g., pages.show or custom-page')
+                                            ->helperText('Enter the full view file name (without .blade.php)')
+                                            ->visible(fn ($get) => $get('page_show_view_type') === 'file'),
+
+                                        CodeEditor::make('page_show_custom_html')
+                                            ->label('Custom HTML')
+                                            ->language(Language::Html)
+                                            ->helperText('Use {{ $page->title }}, {{ $page->content }}, etc.')
+                                            ->visible(fn ($get) => $get('page_show_view_type') === 'custom')
+                                            ->columnSpanFull(),
+
+                                        CodeEditor::make('page_show_custom_css')
+                                            ->label('Custom CSS')
+                                            ->language(Language::Css)
+                                            ->visible(fn ($get) => $get('page_show_view_type') === 'custom')
+                                            ->columnSpanFull(),
+
+                                        CodeEditor::make('page_show_custom_js')
+                                            ->label('Custom JavaScript')
+                                            ->language(Language::JavaScript)
+                                            ->visible(fn ($get) => $get('page_show_view_type') === 'custom')
+                                            ->columnSpanFull(),
+                                    ])
+                                    ->columns(2)
+                                    ->collapsible(),
                             ]),
 
                         Tab::make('SEO')

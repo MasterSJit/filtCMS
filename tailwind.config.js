@@ -3,11 +3,13 @@ module.exports = {
     content: [
         './resources/**/*.blade.php',
         './resources/**/*.js',
-        './resources/**/*.vue',
         './src/**/*.php',
     ],
     theme: {
         extend: {},
+    },
+    corePlugins: {
+        preflight: false, // Disable Tailwind's base reset - Filament handles this
     },
     plugins: [],
 }

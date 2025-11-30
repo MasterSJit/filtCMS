@@ -38,6 +38,7 @@ class FiltCMSServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
+                    // ->ask('Would you like to publish the views?', )
                     ->askToStarRepoOnGitHub('MasterSJit/filtCMS');
             });
 
@@ -110,11 +111,18 @@ class FiltCMSServiceProvider extends PackageServiceProvider
 
     protected function registerBladeComponents(): void
     {
+        // Register class-based components
         $this->loadViewComponentsAs('filtcms', [
             \EthickS\FiltCMS\View\Components\PageContent::class,
             \EthickS\FiltCMS\View\Components\BlogContent::class,
             \EthickS\FiltCMS\View\Components\LatestBlogs::class,
         ]);
+
+        // Register anonymous components namespace for <x-filtcms::...> syntax
+        \Illuminate\Support\Facades\Blade::anonymousComponentPath(
+            __DIR__ . '/../resources/views/components',
+            'filtcms'
+        );
     }
 
     protected function getAssetPackageName(): ?string

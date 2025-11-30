@@ -15,7 +15,7 @@ class CategoryController extends Controller
             ->orderBy('order', 'asc')
             ->get();
 
-        return view('categories.index', compact('categories'));
+        return view('filtcms::categories.index', compact('categories'));
     }
 
     public function show(string $slug): View
@@ -26,6 +26,6 @@ class CategoryController extends Controller
             ->withCount(['pages', 'blogs'])
             ->firstOrFail();
 
-        return view('categories.show', compact('category'));
+        return view('filtcms::categories.show', compact('category'));
     }
 }

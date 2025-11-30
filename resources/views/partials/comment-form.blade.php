@@ -17,7 +17,7 @@
         </div>
     @endif
     
-    <form method="POST" action="{{ route('filtcms.comments.store') }}">
+    {{-- <form method="POST" action="{{ route('filtcms.comments.store') }}">
         @csrf
         
         <input type="hidden" name="commentable_type" value="{{ $commentable_type }}">
@@ -42,5 +42,5 @@
         </div>
         
         <button type="submit">Submit Comment</button>
-    </form>
+    </form> --}}
 </div>

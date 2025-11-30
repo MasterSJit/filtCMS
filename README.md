@@ -91,6 +91,26 @@ This will:
 2. Publish the migrations
 3. Optionally run migrations
 
+OR
+You can publish and run the migrations with:
+
+```bash
+php artisan vendor:publish --tag="filtcms-migrations"
+php artisan migrate
+```
+
+You can publish the config file with:
+
+```bash
+php artisan vendor:publish --tag="filtcms-config"
+```
+
+Optionally, you can publish the views using
+
+```bash
+php artisan vendor:publish --tag="filtcms-views"
+```
+
 ## Configuration
 
 Register the plugin in your Filament panel provider (e.g., `app/Providers/Filament/AdminPanelProvider.php` or your custom panel provider name):

@@ -6,8 +6,6 @@
 
 ```php
 use EthickS\FiltCMS\Facades\FiltCMS;
-
-// Blog Methods
 $title = FiltCMS::blogTitle('my-blog-post');
 $body = FiltCMS::blogBody('my-blog-post');
 $excerpt = FiltCMS::blogExcerpt('my-blog-post');
@@ -45,22 +43,103 @@ $topCategories = FiltCMS::topCategories();
 $blogComments = FiltCMS::blogComments('my-blog-post');
 $pageComments = FiltCMS::pageComments('about-us');
 ```
+OR 
 
+```php
+// Blog Methods (traditional)
+
+$title = FiltCMS::blogTitle('my-blog-post');
+$body = FiltCMS::blogBody('my-blog-post');
+
+$blog = FiltCMS::get('my-blog-post');
+$title = $blog->title();
+$body = $blog->body();
+$excerpt = $blog->excerpt();
+$image = $blog->image();
+$views = $blog->views();
+$comments = $blog->comments();
+
+// Or use specific methods
+$title = $blog->blogTitle();
+$author = $blog->blogAuthor();
+$tags = $blog->blogTags();
+
+// Works with pages too
+$page = FiltCMS::get('about-us');
+$pageTitle = $page->title();
+$pageBody = $page->body();
+
+// Explicit type if needed
+$page = FiltCMS::get('about-us', 'page');
+$category = FiltCMS::get('technology', 'category');
+
+```
 ### Helper Function Access
 
 ```php
-// Using helper function
-$filtcms = filtcms();
 
-// Blog methods
+// Initialize with slug
+$blog = filtcms('my-blog-post');
+$title = $blog->title();       // Gets title (auto-detects blog)
+$body = $blog->body();         // Gets body
+$excerpt = $blog->excerpt();   // Gets excerpt
+$image = $blog->image();       // Gets featured image
+$views = $blog->views();       // Gets view count
+$comments = $blog->comments(); // Gets comments
+
+// Works with pages
+$page = filtcms('about-us');
+$pageTitle = $page->title();
+$pageBody = $page->body();
+
+// Explicit type
+$page = filtcms('about-us', 'page');
+$category = filtcms('technology', 'category');
+
+// Traditional usage (still works)
+$filtcms = filtcms();
 $title = $filtcms->blogTitle('my-blog-post');
 $body = $filtcms->blogBody('my-blog-post');
+$excerpt = $filtcms->blogExcerpt('my-blog-post');
+$image = $filtcms->blogImage('my-blog-post');
+$seoTitle = $filtcms->blogSeoTitle('my-blog-post');
+$category = $filtcms->blogCategory('my-blog-post');
+$author = $filtcms->blogAuthor('my-blog-post');
+$views = $filtcms->blogViews('my-blog-post');
+$likes = $filtcms->blogLikes('my-blog-post');
+$tags = $filtcms->blogTags('my-blog-post');
 
-// Page methods
+// Using for() method for chaining
+$blog = filtcms()->for('my-blog-post');
+$title = $blog->title();
+$body = $blog->body();
+
+
+// Get collections
+$allBlogs = $filtcms->allBlogs();
+$latestBlogs = $filtcms->latestBlogs(5);
+$trendingBlogs = $filtcms->trendingBlogs(10);
+$featuredBlogs = $filtcms->featuredBlogs(3);
+
+// Page Methods
 $pageTitle = $filtcms->pageTitle('about-us');
+$pageBody = $filtcms->pageBody('about-us');
+$pageImage = $filtcms->pageImage('about-us');
+$allPages = $filtcms->allPages();
 
-// Category methods
+// Category Methods
 $categoryName = $filtcms->categoryName('technology');
+$categoryDescription = $filtcms->categoryDescription('technology');
+$categoryImage = $filtcms->categoryImage('technology');
+$categoryBlogs = $filtcms->categoryBlogs('technology');
+$categoryPages = $filtcms->categoryPages('technology');
+$categoryChildren = $filtcms->categoryChildren('technology');
+$allCategories = $filtcms->allCategories();
+$topCategories = $filtcms->topCategories();
+
+// Comment Methods
+$blogComments = $filtcms->blogComments('my-blog-post');
+$pageComments = $filtcms->pageComments('about-us');
 ```
 
 ## API Endpoints

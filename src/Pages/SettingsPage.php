@@ -23,6 +23,8 @@ class SettingsPage extends Page
 {
     protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-cog-6-tooth';
 
+    protected static ?string $slug = 'filtcms/settings';
+
     protected static string | UnitEnum | null $navigationGroup = 'FiltCMS';
 
     protected static ?int $navigationSort = 5;

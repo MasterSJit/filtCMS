@@ -21,6 +21,8 @@ class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
 
+    protected static ?string $slug = 'filtcms/comments';
+
     protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
     protected static string | UnitEnum | null $navigationGroup = 'FiltCMS';

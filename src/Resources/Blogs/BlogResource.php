@@ -21,6 +21,8 @@ class BlogResource extends Resource
 {
     protected static ?string $model = Blog::class;
 
+    protected static ?string $slug = 'filtcms/blogs';
+
     protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedPencilSquare;
 
     protected static ?string $recordTitleAttribute = 'Blog';

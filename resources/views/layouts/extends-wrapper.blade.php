@@ -11,7 +11,7 @@
         <meta name="description" content="{{ $seoData['description'] }}">
     @endif
     @if(!empty($seoData['keywords']))
-        <meta name="keywords" content="{{ $seoData['keywords'] }}">
+        <meta name="keywords" content="{{ is_array($seoData['keywords']) ? implode(', ', $seoData['keywords']) : $seoData['keywords'] }}">
     @endif
 @endpush
 

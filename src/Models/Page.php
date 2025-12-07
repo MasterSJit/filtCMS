@@ -40,6 +40,7 @@ class Page extends Model
         'views_count' => 'integer',
         'likes_count' => 'integer',
         'comments_enabled' => 'boolean',
+        'seo_keywords' => 'array',
     ];
 
     protected static function boot()

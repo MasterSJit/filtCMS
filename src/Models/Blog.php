@@ -46,6 +46,7 @@ class Blog extends Model
         'views_count' => 'integer',
         'likes_count' => 'integer',
         'tags' => 'array',
+        'seo_keywords' => 'array',
     ];
 
     protected static function boot()

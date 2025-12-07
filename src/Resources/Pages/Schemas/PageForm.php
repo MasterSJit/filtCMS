@@ -2,6 +2,7 @@
 
 namespace EthickS\FiltCMS\Resources\Pages\Schemas;
 
+use Dom\Text;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -62,8 +63,8 @@ class PageForm
                                         'history' => ['undo', 'redo'],
                                     ]),
 
-                                TagsInput::make('excerpt')
-                                    ->separator(','),
+                                TextInput::make('excerpt')
+                                    ->maxLength(100),
 
                                 FileUpload::make('featured_image')
                                     ->image()
@@ -116,8 +117,7 @@ class PageForm
                             ->schema([
                                 TextInput::make('seo_title'),
                                 Textarea::make('seo_description'),
-                                TagsInput::make('seo_keywords')
-                                    ->separator(','),
+                                TagsInput::make('seo_keywords'),
                             ])
                             ->columns(2),
                         Tab::make('Social')

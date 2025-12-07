@@ -59,8 +59,8 @@ class BlogForm
                                         'history' => ['undo', 'redo'],
                                     ]),
 
-                                TagsInput::make('excerpt')
-                                    ->separator(','),
+                                TextInput::make('excerpt')
+                                    ->maxLength(100),
 
                                 FileUpload::make('featured_image')
                                     ->image()
@@ -148,8 +148,7 @@ class BlogForm
                                     ->maxLength(160)
                                     ->helperText('Optimal length: 150-160 characters'),
 
-                                TagsInput::make('seo_keywords')
-                                    ->separator(','),
+                                TagsInput::make('seo_keywords'),
                             ])->columns(2),
                     ])
                     ->columnSpanFull(),
